@@ -201,7 +201,7 @@ export function Overview() {
                   { key: "2", title: "item 2" },
                   { key: "3", title: "item 3" }
                 ]}
-                render={item => item.title}
+                render={item => item.title as string}
                 listStyle={()=>({})}
               />
               <Button.Group size="large">
