@@ -5,8 +5,8 @@
   "keywords": [],
   "main": "src/index.tsx",
   "dependencies": {
-    "formik-antd": "1.8.0",
-    "antd": "3.26.6",
+    "formik-antd": "2.0.0-beta.0",
+    "antd": "4.0.0-rc.1",
     "formik": "2.1.2",
     "react": "16.12.0",
     "react-dom": "16.12.0",

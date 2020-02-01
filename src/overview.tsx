@@ -1,5 +1,4 @@
 import * as React from "react";
-import { render } from "react-dom";
 import {
   Checkbox,
   Input,
@@ -22,8 +21,7 @@ import {
   Form
 } from "formik-antd";
 import { Formik } from "formik";
-import { Button, Icon, TreeSelect as $TreeSelect, Tabs } from "antd";
-import { Header } from "./header";
+import { Button,  TreeSelect as $TreeSelect } from "antd";
 import "./index.css";
 import "antd/dist/antd.css";
 import { generateSamplePassword, handleSubmit, handleValidate } from "./utils";
@@ -87,7 +85,6 @@ export function Overview() {
               <Rate
                 name="rate"
                 allowHalf={true}
-                character={<Icon type="heart" />}
                 style={{ color: "red" }}
                 allowClear={true}
               />
@@ -108,7 +105,7 @@ export function Overview() {
                   { label: <span>foo</span>, value: "4" }
                 ]}
               />
-              <Radio.Group name="city" size="default">
+              <Radio.Group name="city" size="large">
                 <Radio.Button value={1}>Hamburg</Radio.Button>
                 <Radio.Button value={2}>Amsterdam</Radio.Button>
                 <Radio.Button value={3}>London</Radio.Button>
