@@ -1,25 +1,31 @@
-import * as React from "react";
-import { render } from "react-dom";
-import {  Tabs } from "antd";
-import { Header } from "./header";
-import { Overview } from "./overview";
-import { useHistory, useParams, BrowserRouter, Route, Switch as BrowserSwitch} from "react-router-dom";
-import { SampleForm } from "./sample-form";
-import { SampleTable } from "./sample-table";
-import "./index.css";
-import "antd/dist/antd.css";
+import * as React from "react"
+import { render } from "react-dom"
+import { Tabs } from "antd"
+import { Header } from "./header"
+import { Overview } from "./overview"
+import {
+  useHistory,
+  useParams,
+  BrowserRouter,
+  Route,
+  Switch as BrowserSwitch,
+} from "react-router-dom"
+import { SampleForm } from "./sample-form"
+import { SampleTable } from "./sample-table"
+import "./index.css"
+import "antd/dist/antd.css"
 
 function Root() {
   const { tab } = useParams<{ tab: string | undefined }>()
   const history = useHistory()
   return (
     <Tabs
+      tabBarStyle={{ marginLeft: 40 }}
       animated={false}
-      onChange={(key) => {
+      onChange={key => {
         history.push(key)
       }}
       activeKey={tab || "/"}
-      style={{margin:0}}
     >
       <Tabs.TabPane tab="Overview" key={"/"}>
         <Header />

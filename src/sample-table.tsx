@@ -1,6 +1,7 @@
 import { Table, AddRowButton, RemoveRowButton, Form, Input } from "formik-antd"
 import { Formik } from "formik"
 import * as React from "react"
+import { DeleteOutlined } from "@ant-design/icons"
 
 export function SampleTable() {
   return (
@@ -16,6 +17,7 @@ export function SampleTable() {
         initialValues={{
           tableData: [
             {
+              id: "123",
               name: "item 1",
               description: "lorem ipsum",
             },
@@ -26,23 +28,23 @@ export function SampleTable() {
         <Form>
           <AddRowButton
             name="tableData"
-            style={{ marginBottom: 20 }}
+            style={{ marginBottom: 12 }}
             createNewRow={() => ({
+              id: "" + Math.random(),
               name: "new",
-              description: "",
+              description: "" + Math.random(),
             })}
           >
             Add
           </AddRowButton>
           <Table
             name="tableData"
-            rowKey={(row, index) => "" + index}
-            style={{ width: 600 }}
+            rowKey={(row, index) => "" + row.id}
             size="small"
             pagination={false}
+            style={{ width: 600 }}
             columns={[
               {
-                width: 100,
                 title: "Name",
                 key: "name",
                 render: (text, record, i) => (
@@ -63,13 +65,11 @@ export function SampleTable() {
                 ),
               },
               {
-                width: 32,
                 key: "actions",
-                align: "right",
-                render: (record, index) => (
+                render: (text, record, index) => (
                   <RemoveRowButton
                     style={{ border: "none" }}
-                    icon="delete"
+                    icon={<DeleteOutlined />}
                     name="tableData"
                     index={index}
                   />

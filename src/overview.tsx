@@ -1,5 +1,4 @@
-import * as React from "react";
-import { render } from "react-dom";
+import * as React from "react"
 import {
   Checkbox,
   Input,
@@ -19,60 +18,65 @@ import {
   Cascader,
   TreeSelect,
   Transfer,
-  Form
-} from "formik-antd";
-import { Formik } from "formik";
-import { Button, Icon, TreeSelect as $TreeSelect, Tabs } from "antd";
-import { Header } from "./header";
-import "./index.css";
-import "antd/dist/antd.css";
-import { generateSamplePassword, handleSubmit, handleValidate } from "./utils";
-
-const { TreeNode } = $TreeSelect;
+  Form,
+  Mentions,
+} from "formik-antd"
+import { Formik } from "formik"
+import { Button, TreeSelect as $TreeSelect } from "antd"
+import "./index.css"
+import "antd/dist/antd.css"
+import { generateSamplePassword, handleSubmit, handleValidate } from "./utils"
+import { HeartFilled } from "@ant-design/icons"
+const { TreeNode } = $TreeSelect
 
 export function Overview() {
   return (
     <Formik
       initialValues={{
         userName: "",
+        //set default/initial values via formik
         email: "sample@email.com",
-        address: { city: "hamburg" },
+        address: { city: "" },
         password: generateSamplePassword(),
         index: 5,
         dollars: 1,
         newsletter: true,
         consent: false,
-        description: "lorem ipsum\ndolor sit amet",
+        description: "",
         time: new Date().toISOString(),
         date: new Date().toISOString(),
         city: 3,
         radioGroup: "1",
         todos: ["2", "3"],
         slider1: 30,
-        slider2: [20, 60]
+        slider2: [20, 60],
       }}
       onSubmit={handleSubmit}
       validate={values => {
         if (!values.userName) {
-          return { userName: "required" };
+          return { userName: "required" }
         }
-        return undefined;
+        return undefined
       }}
       render={formik => (
         <Form>
           <div className="container">
             <div className="component-container">
-              <Input name="email" />
+              <Input name="email" placeholder="Basic Input" />
               <Form.Item
                 name="userName"
                 hasFeedback={true}
                 showValidateSuccess={true}
               >
-                <Input name="userName" placeholder="input with validation" />
+                <Input name="userName" placeholder="Validated input" />
               </Form.Item>
-              <Input addonBefore="city" name="address.city" />
-              <Input.Password name="password" />
-              <Input.TextArea name="description" />
+              <Input
+                addonBefore="city"
+                name="address.city"
+                placeholder="Input (nested object)"
+              />
+              <Input.Password name="password" placeholder="Input.Password" />
+              <Input.TextArea name="description" placeholder="Input.TextArea" />
               <InputNumber name="index" min={0} />
               <InputNumber
                 name="dollars"
@@ -80,35 +84,49 @@ export function Overview() {
               />
               <AutoComplete
                 name="auto"
+                placeholder="Autocomplete"
                 dataSource={["Berlin", "Amsterdam", "Paris"]}
                 showArrow={true}
               />
+              <Mentions name="mentions" placeholder="Mentions">
+                <Mentions.Option value="afc163">afc163</Mentions.Option>
+                <Mentions.Option value="zombieJ">zombieJ</Mentions.Option>
+                <Mentions.Option value="yesmeck">yesmeck</Mentions.Option>
+              </Mentions>
               <Rate name="rate" allowHalf={true} allowClear={true} />
               <Rate
                 name="rate"
                 allowHalf={true}
-                character={<Icon type="heart" />}
                 style={{ color: "red" }}
                 allowClear={true}
+                character={<HeartFilled />}
               />
               <Slider name="slider1" />
               <Slider name="slider2" range={true} />
               <Checkbox name="newsletter">Checkbox</Checkbox>
               <div>
-                <Switch name="consent" checkedChildren="开" unCheckedChildren="关" />
+                <Switch
+                  name="consent"
+                  checkedChildren="开"
+                  unCheckedChildren="关"
+                />
               </div>
-              <TimePicker name="time" />
-              <DatePicker name="date" showTime={true} />
+              <TimePicker name="time" placeholder="TimePicker" />
+              <DatePicker
+                name="date"
+                showTime={true}
+                placeholder="DatePicker"
+              />
               <Radio.Group
                 name="radioGroup"
                 options={[
                   { label: "item 1", value: "1" },
                   { label: "item 2", value: 2 },
                   { label: "item 3", value: "3" },
-                  { label: <span>foo</span>, value: "4" }
+                  { label: <span>foo</span>, value: "4" },
                 ]}
               />
-              <Radio.Group name="city" size="default">
+              <Radio.Group name="city" size="large">
                 <Radio.Button value={1}>Hamburg</Radio.Button>
                 <Radio.Button value={2}>Amsterdam</Radio.Button>
                 <Radio.Button value={3}>London</Radio.Button>
@@ -118,7 +136,7 @@ export function Overview() {
                 options={[
                   { label: "item 1", value: "1" },
                   { label: "item 2", value: "2" },
-                  { label: "item 3", value: "3" }
+                  { label: "item 3", value: "3" },
                 ]}
               />
               <Select
@@ -159,11 +177,11 @@ export function Overview() {
                         children: [
                           {
                             value: "xihu",
-                            label: "West Lake"
-                          }
-                        ]
-                      }
-                    ]
+                            label: "West Lake",
+                          },
+                        ],
+                      },
+                    ],
                   },
                   {
                     value: "jiangsu",
@@ -171,10 +189,10 @@ export function Overview() {
                     children: [
                       {
                         value: "nanjing",
-                        label: "Nanjing"
-                      }
-                    ]
-                  }
+                        label: "Nanjing",
+                      },
+                    ],
+                  },
                 ]}
                 name="cascader"
                 placeholder="Cascader"
@@ -199,10 +217,10 @@ export function Overview() {
                 dataSource={[
                   { key: "1", title: "item 1" },
                   { key: "2", title: "item 2" },
-                  { key: "3", title: "item 3" }
+                  { key: "3", title: "item 3" },
                 ]}
-                render={item => item.title}
-                listStyle={()=>({})}
+                render={item => item.title as string}
+                listStyle={() => ({})}
               />
               <Button.Group size="large">
                 <ResetButton>Reset</ResetButton>
@@ -217,5 +235,5 @@ export function Overview() {
         </Form>
       )}
     />
-  );
+  )
 }

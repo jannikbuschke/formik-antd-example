@@ -9,7 +9,7 @@ import {
   Form,
   FormItem,
 } from "formik-antd"
-import { message, Button } from "antd"
+import { message, Button, Row, Col } from "antd"
 
 function validateRequired(value: string) {
   return value ? undefined : "required"
@@ -20,9 +20,6 @@ export const SampleForm = () => {
     <div
       style={{
         marginTop: 80,
-        maxWidth: 700,
-        marginRight: "auto",
-        marginLeft: "auto",
       }}
     >
       <Formik
@@ -38,20 +35,20 @@ export const SampleForm = () => {
           actions.setSubmitting(false)
           actions.resetForm()
         }}
-        validate={(values) => {
+        validate={values => {
           if (!values.lastName) {
             return { lastName: "required" }
           }
           return {}
         }}
         render={() => (
-          <Form style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
-            <div>
-              <Button.Group style={{ marginBottom: 20 }}>
-                <ResetButton>Reset</ResetButton>
-                <SubmitButton>Submit</SubmitButton>
-              </Button.Group>
-
+          <Form
+            style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr" }}
+            labelCol={{ xs: 4 }}
+            wrapperCol={{ xs: 20 }}
+          >
+            <div style={{ flex: 1 }} />
+            <div style={{ background: "white", flex: 1, padding: 40 }}>
               <FormItem
                 name="firstName"
                 label="Firstname"
@@ -69,11 +66,26 @@ export const SampleForm = () => {
               <FormItem name="password" label="Password">
                 <Input.Password name="password" placeholder="Password" />
               </FormItem>
-              <FormItem name="newsletter">
+              <FormItem
+                name="newsletter"
+                labelCol={{ xs: 4 }}
+                wrapperCol={{ offset: 4, xs: 20 }}
+              >
                 <Checkbox name="newsletter">Newsletter</Checkbox>
               </FormItem>
+
+              <Row style={{ marginTop: 60 }}>
+                <Col offset={8}>
+                  <Button.Group>
+                    <ResetButton>Reset</ResetButton>
+                    <SubmitButton>Submit</SubmitButton>
+                  </Button.Group>
+                </Col>
+              </Row>
             </div>
-            <FormikDebug />
+            <pre style={{ flex: 1 }}>
+              <FormikDebug />
+            </pre>
           </Form>
         )}
       />
